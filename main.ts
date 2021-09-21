@@ -59,7 +59,7 @@ basic.forever(function () {
 })
 basic.forever(function () {
     strip.setBrightness(255)
-    if (Environment.ReadLightIntensity(AnalogPin.P3) < 125) {
+    if (Environment.ReadLightIntensity(AnalogPin.P3) < 50) {
         range = strip.range(0, 20)
         range2 = strip.range(20, 20)
         range.showColor(neopixel.colors(NeoPixelColors.Blue))
