@@ -24,15 +24,16 @@ basic.pause(2000)
 servos.P1.stop()
 servos.P2.stop()
 basic.forever(function () {
-    if (Environment.ReadSoilHumidity(AnalogPin.P4) < 60) {
+    if (Environment.ReadSoilHumidity(AnalogPin.P10) < 60) {
         servos.P2.setAngle(160)
-    } else if (Environment.ReadSoilHumidity(AnalogPin.P4) >= 60 && Environment.ReadSoilHumidity(AnalogPin.P4) <= 70) {
+    } else if (Environment.ReadSoilHumidity(AnalogPin.P10) >= 60 && Environment.ReadSoilHumidity(AnalogPin.P10) <= 70) {
         servos.P2.stop()
-    } else if (Environment.ReadSoilHumidity(AnalogPin.P4) > 70) {
+    } else if (Environment.ReadSoilHumidity(AnalogPin.P10) > 70) {
         servos.P2.setAngle(10)
     }
-    servos.P2.stop()
     basic.pause(5000)
+    servos.P2.stop()
+    basic.pause(60000)
 })
 basic.forever(function () {
     if (Environment.octopus_BME280(Environment.BME280_state.BME280_temperature_C) >= 30) {
