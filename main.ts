@@ -24,11 +24,11 @@ basic.pause(2000)
 servos.P1.stop()
 servos.P2.stop()
 basic.forever(function () {
-    if (Environment.ReadSoilHumidity(AnalogPin.P10) < 60) {
+    if (Environment.ReadSoilHumidity(AnalogPin.P10) < 80) {
         servos.P2.setAngle(160)
-    } else if (Environment.ReadSoilHumidity(AnalogPin.P10) >= 60 && Environment.ReadSoilHumidity(AnalogPin.P10) <= 70) {
+    } else if (Environment.ReadSoilHumidity(AnalogPin.P10) >= 80 && Environment.ReadSoilHumidity(AnalogPin.P10) <= 90) {
         servos.P2.stop()
-    } else if (Environment.ReadSoilHumidity(AnalogPin.P10) > 70) {
+    } else if (Environment.ReadSoilHumidity(AnalogPin.P10) > 90) {
         servos.P2.setAngle(10)
     }
     basic.pause(5000)
@@ -51,7 +51,7 @@ basic.forever(function () {
         }
         servos.P1.stop()
     }
-    basic.pause(5000)
+    basic.pause(60000)
 })
 basic.forever(function () {
     strip.setBrightness(255)
@@ -63,7 +63,7 @@ basic.forever(function () {
     } else {
         strip.showColor(neopixel.colors(NeoPixelColors.Black))
     }
-    basic.pause(5000)
+    basic.pause(60000)
 })
 basic.forever(function () {
     ESP8266_IoT.connectThingSpeak()
