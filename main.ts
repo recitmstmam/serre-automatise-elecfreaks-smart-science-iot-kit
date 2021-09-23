@@ -15,47 +15,48 @@ let range: neopixel.Strip = null
 ESP8266_IoT.initWIFI(SerialPin.P8, SerialPin.P12, BaudRate.BaudRate115200)
 ESP8266_IoT.connectWifi("MOBILE.CSDPS", "2233avroyalequebec")
 basic.pause(1000)
-let Angle_fenêtre = 160
+let Angle_fenêtre = 170
 let strip = neopixel.create(DigitalPin.P13, 40, NeoPixelMode.RGB)
 strip.showColor(neopixel.colors(NeoPixelColors.Black))
 servos.P1.setAngle(Angle_fenêtre)
-servos.P2.setAngle(10)
+servos.P2.setAngle(0)
 basic.pause(2000)
 servos.P1.stop()
 servos.P2.stop()
 basic.forever(function () {
-    if (Environment.ReadSoilHumidity(AnalogPin.P10) < 80) {
+    if (Environment.ReadSoilHumidity(AnalogPin.P4) < 60) {
         servos.P2.setAngle(160)
-    } else if (Environment.ReadSoilHumidity(AnalogPin.P10) >= 80 && Environment.ReadSoilHumidity(AnalogPin.P10) <= 90) {
+    } else if (Environment.ReadSoilHumidity(AnalogPin.P4) >= 60 && Environment.ReadSoilHumidity(AnalogPin.P4) <= 75) {
         servos.P2.stop()
-    } else if (Environment.ReadSoilHumidity(AnalogPin.P10) > 90) {
-        servos.P2.setAngle(10)
+    } else if (Environment.ReadSoilHumidity(AnalogPin.P4) > 75) {
+        servos.P2.setAngle(0)
     }
-    basic.pause(5000)
+    basic.pause(2000)
     servos.P2.stop()
     basic.pause(60000)
 })
 basic.forever(function () {
-    if (Environment.octopus_BME280(Environment.BME280_state.BME280_temperature_C) >= 30) {
-        while (Angle_fenêtre > 90) {
+    if (Environment.octopus_BME280(Environment.BME280_state.BME280_temperature_C) >= 24) {
+        while (Angle_fenêtre > 35) {
             Angle_fenêtre += -1
             servos.P1.setAngle(Angle_fenêtre)
             basic.pause(10)
         }
+        basic.pause(1000)
         servos.P1.stop()
     } else {
-        while (Angle_fenêtre < 160) {
+        while (Angle_fenêtre < 170) {
             Angle_fenêtre += 1
             servos.P1.setAngle(Angle_fenêtre)
             basic.pause(10)
         }
+        basic.pause(1000)
         servos.P1.stop()
     }
     basic.pause(60000)
 })
 basic.forever(function () {
-    strip.setBrightness(255)
-    if (Environment.ReadLightIntensity(AnalogPin.P3) < 50) {
+    if (Environment.ReadLightIntensity(AnalogPin.P3) <= 60) {
         range = strip.range(0, 20)
         range2 = strip.range(20, 20)
         range.showColor(neopixel.colors(NeoPixelColors.Blue))
