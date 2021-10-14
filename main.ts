@@ -16,7 +16,7 @@ ESP8266_IoT.initWIFI(SerialPin.P8, SerialPin.P12, BaudRate.BaudRate115200)
 ESP8266_IoT.connectWifi("MOBILE.CSDPS", "2233avroyalequebec")
 basic.pause(1000)
 let Angle_fenêtre = 170
-let strip = neopixel.create(DigitalPin.P10, 40, NeoPixelMode.RGB)
+let strip = neopixel.create(DigitalPin.P13, 40, NeoPixelMode.RGB)
 strip.showColor(neopixel.colors(NeoPixelColors.Black))
 servos.P1.setAngle(Angle_fenêtre)
 servos.P2.setAngle(0)
@@ -56,7 +56,7 @@ basic.forever(function () {
     basic.pause(60000)
 })
 basic.forever(function () {
-    if (Environment.ReadLightIntensity(AnalogPin.P3) <= 60) {
+    if (Environment.ReadLightIntensity(AnalogPin.P10) <= 60) {
         range = strip.range(0, 20)
         range2 = strip.range(20, 20)
         range.showColor(neopixel.colors(NeoPixelColors.White))
@@ -74,7 +74,7 @@ basic.forever(function () {
     Environment.octopus_BME280(Environment.BME280_state.BME280_humidity),
     Environment.octopus_BME280(Environment.BME280_state.BME280_pressure) / 10,
     Environment.ReadSoilHumidity(AnalogPin.P4),
-    Environment.ReadLightIntensity(AnalogPin.P3)
+    Environment.ReadLightIntensity(AnalogPin.P10)
     )
     ESP8266_IoT.uploadData()
 })
