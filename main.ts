@@ -16,7 +16,7 @@ ESP8266_IoT.initWIFI(SerialPin.P8, SerialPin.P12, BaudRate.BaudRate115200)
 ESP8266_IoT.connectWifi("MOBILE.CSDPS", "2233avroyalequebec")
 basic.pause(1000)
 let Angle_fenêtre = 170
-let strip = neopixel.create(DigitalPin.P13, 40, NeoPixelMode.RGB)
+let strip = neopixel.create(DigitalPin.P10, 40, NeoPixelMode.RGB)
 strip.showColor(neopixel.colors(NeoPixelColors.Black))
 servos.P1.setAngle(Angle_fenêtre)
 servos.P2.setAngle(0)
