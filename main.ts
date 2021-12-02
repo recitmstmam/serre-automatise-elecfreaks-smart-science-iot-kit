@@ -24,11 +24,11 @@ basic.pause(2000)
 pins.digitalWritePin(DigitalPin.P3, 0)
 pins.digitalWritePin(DigitalPin.P2, 0)
 basic.forever(function () {
-    if (Environment.ReadSoilHumidity(AnalogPin.P4) < 78.5) {
+    if (Math.trunc(Environment.ReadSoilHumidity(AnalogPin.P4)) < 78) {
         pins.servoWritePin(AnalogPin.P2, 160)
-    } else if (Environment.ReadSoilHumidity(AnalogPin.P4) >= 78.6 && Environment.ReadSoilHumidity(AnalogPin.P4) <= 79.4) {
+    } else if (Math.trunc(Environment.ReadSoilHumidity(AnalogPin.P4)) >= 78.1 && Math.trunc(Environment.ReadSoilHumidity(AnalogPin.P4)) <= 78.9) {
         pins.digitalWritePin(DigitalPin.P2, 0)
-    } else if (Environment.ReadSoilHumidity(AnalogPin.P4) > 79.5) {
+    } else if (Math.trunc(Environment.ReadSoilHumidity(AnalogPin.P4)) > 79) {
         pins.servoWritePin(AnalogPin.P2, 0)
     }
     basic.pause(2000)
