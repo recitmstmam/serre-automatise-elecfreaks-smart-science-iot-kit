@@ -10,6 +10,7 @@ input.onButtonPressed(Button.B, function () {
     basic.showString("Luminosité = " + Environment.ReadLightIntensity(AnalogPin.P1) + " %")
     basic.pause(1000)
 })
+let range3: neopixel.Strip = null
 let range2: neopixel.Strip = null
 let range: neopixel.Strip = null
 ESP8266_IoT.initWIFI(SerialPin.P8, SerialPin.P12, BaudRate.BaudRate115200)
@@ -24,11 +25,11 @@ basic.pause(2000)
 pins.digitalWritePin(DigitalPin.P3, 0)
 pins.digitalWritePin(DigitalPin.P2, 0)
 basic.forever(function () {
-    if (Environment.ReadSoilHumidity(AnalogPin.P4) < 78) {
+    if (Environment.ReadSoilHumidity(AnalogPin.P4) < 75) {
         pins.servoWritePin(AnalogPin.P2, 160)
-    } else if (Environment.ReadSoilHumidity(AnalogPin.P4) >= 78.1 && Environment.ReadSoilHumidity(AnalogPin.P4) <= 78.9) {
+    } else if (Environment.ReadSoilHumidity(AnalogPin.P4) >= 75.1 && Environment.ReadSoilHumidity(AnalogPin.P4) <= 77.5) {
         pins.digitalWritePin(DigitalPin.P2, 0)
-    } else if (Environment.ReadSoilHumidity(AnalogPin.P4) > 79) {
+    } else if (Environment.ReadSoilHumidity(AnalogPin.P4) > 77.6) {
         pins.servoWritePin(AnalogPin.P2, 0)
     }
     basic.pause(2000)
@@ -57,10 +58,12 @@ basic.forever(function () {
 })
 basic.forever(function () {
     if (Environment.ReadLightIntensity(AnalogPin.P1) <= 40) {
-        range = strip.range(0, 20)
-        range2 = strip.range(20, 20)
+        range = strip.range(0, 24)
+        range2 = strip.range(24, 8)
+        range3 = strip.range(32, 8)
         range.showColor(neopixel.colors(NeoPixelColors.White))
-        range2.showColor(neopixel.colors(NeoPixelColors.White))
+        range2.showColor(neopixel.colors(NeoPixelColors.Blue))
+        range3.showColor(neopixel.colors(NeoPixelColors.Red))
     } else {
         strip.showColor(neopixel.colors(NeoPixelColors.Black))
     }
