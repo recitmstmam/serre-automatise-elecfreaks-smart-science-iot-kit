@@ -58,9 +58,9 @@ basic.forever(function () {
 })
 basic.forever(function () {
     if (Environment.ReadLightIntensity(AnalogPin.P1) <= 40) {
-        range = strip.range(0, 24)
-        range2 = strip.range(24, 8)
-        range3 = strip.range(32, 8)
+        range = strip.range(0, 20)
+        range2 = strip.range(20, 10)
+        range3 = strip.range(30, 10)
         range.showColor(neopixel.colors(NeoPixelColors.White))
         range2.showColor(neopixel.colors(NeoPixelColors.Blue))
         range3.showColor(neopixel.colors(NeoPixelColors.Red))
